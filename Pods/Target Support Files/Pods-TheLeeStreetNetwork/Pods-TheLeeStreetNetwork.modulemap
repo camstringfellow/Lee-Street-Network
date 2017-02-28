@@ -1,0 +1,6 @@
+framework module Pods_TheLeeStreetNetwork {
+  umbrella header "Pods-TheLeeStreetNetwork-umbrella.h"
+
+  export *
+  module * { export * }
+}
