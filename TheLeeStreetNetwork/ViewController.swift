@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
-import Firebase
+import SwiftKeychainWrapper
+
 
 class ViewController: UIViewController {
 
@@ -19,7 +21,23 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("CAM: ID found in keychain")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+            
+        }
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        //Automatic login with Keychain
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("CAM: ID found in keychain")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,34 +51,49 @@ class ViewController: UIViewController {
         
         if let email = emailField.text, let pwd = passwordField.text {
             
+            //Sign in if user already exists
             FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 
                 if error == nil {
                     
                     print("CAM: Email user successfully authenticated with Firebase")
                     
+                    if let user = user {
+                        
+                        self.completeSignIn(id: user.uid)
+                        
+                    }
+                    
                 } else {
                     
-                    FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
+                    //Create New User if one does not exist
+                    FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
                       
                         if error != nil {
                             
+                            //Something went wrong
                             print("CAM: Unable to Authenticate with Firebase using email")
-                            print(error)
+                            print(error!)
                             
                         } else {
                             
                             print("CAM: Successfully authenticated with Firebase")
                             
-                        }
+                            if let user = user {
+                                
+                                self.completeSignIn(id: user.uid)
+                                
+                            }//if let user
+                            
+                        } //if error
                         
-                    })
+                    })//FIRAuth.auth()
                     
-                }
+                }//if error
                 
-            })
+            }) //FIRAuth.auth()
             
-        }
+        }//if let email
         
     }
     
@@ -104,6 +137,7 @@ class ViewController: UIViewController {
     
     func firebaseAuth(_ credential: FIRAuthCredential) {
         
+        //(user, error) <- completion handler of signing method
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil {
                 
@@ -113,6 +147,16 @@ class ViewController: UIViewController {
                 
                 print("CAM: Successfully authenicated with Firebase")
                 
+                //moved this to func completeSignIn
+                //KeychainWrapper.standard.set((user?.uid)!, forKey: KEY_UID)
+                
+                //unwrapping user (another way of doing "!" but this is the safe way
+                if let user = user {
+                    
+                        //get the users UID
+                        self.completeSignIn(id: user.uid)
+                    
+                }
                 
             } //end else
         
@@ -122,6 +166,21 @@ class ViewController: UIViewController {
     
     //----------------------------------------------------------------------
 
+    //No access to uid because it is in another func. So add in a parameter so it can pass a string (the uid) and put that where the "user?.uid went and in the function with the uid, set it to a string and pass it through.
+    func completeSignIn(id: String) {
+        
+        //save id to user
+        let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)
+        print("CAM: Data saved to keychain \(keychainResult)")
+        
+        //Send login directly to FeedViewController
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_UID) {
+            print("CAM: ID found in keychain")
+            performSegue(withIdentifier: "goToFeed", sender: nil)
+            
+        }
+        
+    }//func completeSignIn
     
 }
 

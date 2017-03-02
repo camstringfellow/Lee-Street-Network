@@ -13,7 +13,5 @@ target 'TheLeeStreetNetwork' do
   pod 'Firebase/Storage'
   pod 'FBSDKLoginKit'
   pod 'SwiftKeychainWrapper'
-  pod 'FBSDKLoginKit'
-
 
 end
