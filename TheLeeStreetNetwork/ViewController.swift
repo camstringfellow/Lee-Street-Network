@@ -60,7 +60,10 @@ class ViewController: UIViewController {
                     
                     if let user = user {
                         
-                        self.completeSignIn(id: user.uid)
+                        //get user info for Firebase
+                        let userData = ["provider": user.providerID]
+                        
+                        self.completeSignIn(id: user.uid, userData: userData)
                         
                     }
                     
@@ -81,7 +84,10 @@ class ViewController: UIViewController {
                             
                             if let user = user {
                                 
-                                self.completeSignIn(id: user.uid)
+                                //get user info for Firebase
+                                let userData = ["provider": user.providerID]
+                                
+                                self.completeSignIn(id: user.uid, userData: userData)
                                 
                             }//if let user
                             
@@ -153,8 +159,9 @@ class ViewController: UIViewController {
                 //unwrapping user (another way of doing "!" but this is the safe way
                 if let user = user {
                     
+                        let userData = ["provider": credential.provider]
                         //get the users UID
-                        self.completeSignIn(id: user.uid)
+                    self.completeSignIn(id: user.uid, userData: userData)
                     
                 }
                 
@@ -167,7 +174,10 @@ class ViewController: UIViewController {
     //----------------------------------------------------------------------
 
     //No access to uid because it is in another func. So add in a parameter so it can pass a string (the uid) and put that where the "user?.uid went and in the function with the uid, set it to a string and pass it through.
-    func completeSignIn(id: String) {
+    func completeSignIn(id: String, userData: Dictionary<String, String>) {
+        
+        //passing user information to Firebase
+        DataService.ds.createFirebaseDBUser(uid: id, userData: userData)
         
         //save id to user
         let keychainResult = KeychainWrapper.standard.set(id, forKey: KEY_UID)

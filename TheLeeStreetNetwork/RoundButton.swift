@@ -26,6 +26,7 @@ class RoundButton: UIButton {
        super.layoutSubviews()
         
        layer.cornerRadius = self.frame.width / 2
+        clipsToBounds = true
         
         
     }
