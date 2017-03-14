@@ -1,14 +1,14 @@
 //
-//  RoundButton.swift
-//  LeeStreetSocialApp
+//  CircleImageView.swift
+//  TheLeeStreetNetwork
 //
-//  Created by Cameron Stringfellow on 2/27/17.
+//  Created by Cameron Stringfellow on 3/13/17.
 //  Copyright © 2017 Stringfellow. All rights reserved.
 //
 
 import UIKit
 
-class RoundButton: UIButton {
+class CircleImageView: UIImageView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -17,17 +17,21 @@ class RoundButton: UIButton {
         layer.shadowOpacity = 0.8
         layer.shadowRadius = 5.0
         layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        imageView?.contentMode = .scaleAspectFit
-
         
     }
+    
+    /*
+     override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        
+    }
+     */
     
     override func layoutSubviews() {
-       super.layoutSubviews()
+        super.layoutSubviews()
         
-       layer.cornerRadius = self.frame.width / 2
-        
+        layer.cornerRadius = self.frame.width / 2.0
         
     }
-    
+
 }
