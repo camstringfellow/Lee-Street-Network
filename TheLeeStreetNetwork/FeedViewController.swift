@@ -12,27 +12,22 @@ import SwiftKeychainWrapper
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    
+    
     @IBOutlet weak var tableView: UITableView!
-    
-    
-    @IBAction func signOut(_ sender: Any) {
-        
-        //remove object from Keychain
-        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
-        //print out what item was removed
-        print("CAM: User keychain successfully removed")
-        //Sign out from Firebase
-        try! FIRAuth.auth()?.signOut()
-        //Go back to homescreen
-        performSegue(withIdentifier: "goToSignIn", sender: nil)
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
+            
+            //prints out value of posts in firebase
+            print(snapshot.value as Any)
+            
+        })
         
     }
     
@@ -57,6 +52,19 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func signOut(_ sender: Any) {
+        
+        //remove object from Keychain
+        KeychainWrapper.standard.removeObject(forKey: KEY_UID)
+        //print out what item was removed
+        print("CAM: User keychain successfully removed")
+        //Sign out from Firebase
+        try! FIRAuth.auth()?.signOut()
+        //Go back to homescreen
+        performSegue(withIdentifier: "goToSignIn", sender: nil)
+        
     }
     
 

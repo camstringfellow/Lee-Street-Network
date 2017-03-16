@@ -13,7 +13,7 @@ let DB_BASE = FIRDatabase.database().reference()
 
 class DataService {
     
-    //singleton (single instance)
+    //singleton (single instance) lets us access the database
     static let ds = DataService()
     
     //reference to the data base
