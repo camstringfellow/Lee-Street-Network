@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		D82A505E1E7737FF00BF54D0 /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82A505D1E7737FF00BF54D0 /* CircleImageView.swift */; };
 		D82A50601E77A82B00BF54D0 /* PostViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82A505F1E77A82B00BF54D0 /* PostViewCell.swift */; };
+		D8469DCA1E80A05900DF228D /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8469DC91E80A05900DF228D /* Post.swift */; };
 		D84F15EF1E787B9C00EF340C /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D84F15EE1E787B9C00EF340C /* DataService.swift */; };
 		D89F26C51E68A63B00F46B7F /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D89F26C41E68A63B00F46B7F /* FeedViewController.swift */; };
 		D8A881ED1E65DD650093E17C /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8A881EC1E65DD650093E17C /* RoundButton.swift */; };
@@ -31,6 +32,7 @@
 		CF7FC7D910D0343090866D44 /* Pods-TheLeeStreetNetwork.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TheLeeStreetNetwork.release.xcconfig"; path = "Pods/Target Support Files/Pods-TheLeeStreetNetwork/Pods-TheLeeStreetNetwork.release.xcconfig"; sourceTree = "<group>"; };
 		D82A505D1E7737FF00BF54D0 /* CircleImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		D82A505F1E77A82B00BF54D0 /* PostViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostViewCell.swift; sourceTree = "<group>"; };
+		D8469DC91E80A05900DF228D /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		D84F15EE1E787B9C00EF340C /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		D89F26C41E68A63B00F46B7F /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		D8A881EC1E65DD650093E17C /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 		D8EE0B811E65D98A00A5A413 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D8469DC91E80A05900DF228D /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				D8A881ED1E65DD650093E17C /* RoundButton.swift in Sources */,
 				D82A505E1E7737FF00BF54D0 /* CircleImageView.swift in Sources */,
 				D8A881EF1E65DD6E0093E17C /* FancyButton.swift in Sources */,
+				D8469DCA1E80A05900DF228D /* Post.swift in Sources */,
 				D8A881F31E65DD790093E17C /* CleanView.swift in Sources */,
 				D82A50601E77A82B00BF54D0 /* PostViewCell.swift in Sources */,
 				D84F15EF1E787B9C00EF340C /* DataService.swift in Sources */,
