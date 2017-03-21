@@ -69,11 +69,27 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //reference
         let post = posts[indexPath.row]
-        //check
-        print("CAM: \(post.caption)")
         
-        return tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostViewCell
+        //check
+        //print("CAM: \(post.caption)")
+        
+        //check to see if we can create a cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostViewCell {
+            
+            //configure cell (to file we specified)
+            cell.configureCell(post: post)
+            
+            return cell
+        } else {
+            
+            //for saftey
+            return PostViewCell()
+        }
+        
+        //temporary cell
+        //return tableView.dequeueReusableCell(withIdentifier: "PostCell") as! PostViewCell
         
     }
 
