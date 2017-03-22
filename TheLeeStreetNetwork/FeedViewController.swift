@@ -12,14 +12,15 @@ import SwiftKeychainWrapper
 
 class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-
+    //outlets
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var imageAdd: CircleImageView!
     
-    //array of posts
+    //variables
     var posts = [Post]()
     var imagePicker: UIImagePickerController!
+    static var imageCache: NSCache<NSString, UIImage> = NSCache()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,12 +84,24 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         //print("CAM: \(post.caption)")
         
         //check to see if we can create a cell
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "PostCell") as? PostViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "PostViewCell") as? PostViewCell {
             
-            //configure cell (to file we specified)
-            cell.configureCell(post: post)
+            //variable for image
+            //var img: UIImage
             
-            return cell
+            if let img = FeedViewController.imageCache.object(forKey: post.imageUrl as NSString) {
+                
+                cell.configureCell(post: post, img: img)
+                return cell
+                
+            } else {
+                
+                //configure cell (to file we specified)
+                cell.configureCell(post: post)
+                return cell
+                
+            }
+            
         } else {
             
             //for saftey
