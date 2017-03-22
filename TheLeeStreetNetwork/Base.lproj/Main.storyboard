@@ -169,13 +169,18 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zlw-E4-04q">
                                         <rect key="frame" x="6" y="5" width="324.66666666666669" height="54"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo_camera_3x" translatesAutoresizingMaskIntoConstraints="NO" id="ecx-30-yu5" customClass="CircleImageView" customModule="TheLeeStreetNetwork" customModuleProvider="target">
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_photo_camera_3x" translatesAutoresizingMaskIntoConstraints="NO" id="ecx-30-yu5" customClass="CircleImageView" customModule="TheLeeStreetNetwork" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="49" height="54"/>
                                                 <color key="backgroundColor" red="0.45882352939999999" green="0.45882352939999999" blue="0.45882352939999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="54" id="Xq8-OT-VQk"/>
                                                     <constraint firstAttribute="width" constant="49" id="oA8-LO-yhc"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="XHp-MM-Qm3" appends="YES" id="bOg-z8-QCR"/>
+                                                    <outletCollection property="gestureRecognizers" destination="Qte-lW-GRT" appends="YES" id="vSs-Jd-kYU"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Describe what is happening..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="clM-Ox-Veq" customClass="FancyField" customModule="TheLeeStreetNetwork" customModuleProvider="target">
                                                 <rect key="frame" x="59" y="0.0" width="206.66666666666669" height="54"/>
@@ -262,7 +267,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="bEV-J1-by3">
-                                                            <rect key="frame" x="290.66666666666674" y="405" width="83.333333333333314" height="23"/>
+                                                            <rect key="frame" x="287" y="399" width="83" height="23"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Likes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAh-eg-KkV">
                                                                     <rect key="frame" x="0.0" y="0.0" width="38.666666666666629" height="23"/>
@@ -284,10 +289,10 @@
                                                         <constraint firstAttribute="trailing" secondItem="YQA-2W-54v" secondAttribute="trailing" constant="11" id="1un-HE-AEf"/>
                                                         <constraint firstAttribute="bottom" secondItem="YQA-2W-54v" secondAttribute="bottom" constant="33" id="2I2-MO-3Px"/>
                                                         <constraint firstItem="YQA-2W-54v" firstAttribute="top" secondItem="UF6-Hu-9BP" secondAttribute="top" constant="5" id="C8s-5j-aX3"/>
-                                                        <constraint firstAttribute="trailing" secondItem="bEV-J1-by3" secondAttribute="trailing" constant="8" id="OW8-0m-iMF"/>
+                                                        <constraint firstAttribute="trailing" secondItem="bEV-J1-by3" secondAttribute="trailing" constant="12" id="OW8-0m-iMF"/>
                                                         <constraint firstAttribute="bottom" secondItem="bEV-J1-by3" secondAttribute="bottom" constant="8" id="Xnl-Dc-BGo"/>
-                                                        <constraint firstItem="bEV-J1-by3" firstAttribute="top" secondItem="YQA-2W-54v" secondAttribute="bottom" constant="8" id="ccK-xI-Mfz"/>
-                                                        <constraint firstAttribute="bottom" secondItem="bEV-J1-by3" secondAttribute="bottom" constant="2" id="f4m-bB-rY4"/>
+                                                        <constraint firstItem="bEV-J1-by3" firstAttribute="top" secondItem="YQA-2W-54v" secondAttribute="bottom" constant="2" id="ccK-xI-Mfz"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bEV-J1-by3" secondAttribute="bottom" constant="8" id="f4m-bB-rY4"/>
                                                         <constraint firstItem="YQA-2W-54v" firstAttribute="leading" secondItem="UF6-Hu-9BP" secondAttribute="leading" constant="5" id="iLs-Gh-xRv"/>
                                                     </constraints>
                                                 </view>
@@ -358,13 +363,20 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageAdd" destination="ecx-30-yu5" id="qG7-Wf-xgw"/>
                         <outlet property="tableView" destination="tn0-a0-ZNZ" id="WVD-iO-ENA"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="goToSignIn" id="11e-cy-3LL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MNi-Zv-qlR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="XHp-MM-Qm3"/>
+                <tapGestureRecognizer id="Qte-lW-GRT">
+                    <connections>
+                        <action selector="addImageTapped:" destination="2r1-lW-rnH" id="0cM-IE-Jnh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="919.20000000000005" y="72.413793103448285"/>
+            <point key="canvasLocation" x="941" y="109"/>
         </scene>
     </scenes>
     <resources>

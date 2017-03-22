@@ -10,20 +10,27 @@ import UIKit
 import Firebase
 import SwiftKeychainWrapper
 
-class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    
-    
+
     @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var imageAdd: CircleImageView!
     
     //array of posts
     var posts = [Post]()
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self
         tableView.dataSource = self
+        
+        //initialize imagePicker
+        imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = self
         
         DataService.ds.REF_POSTS.observe(.value, with: { (snapshot) in
             
@@ -93,9 +100,30 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        //check to make sure its a UIImage
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            
+            imageAdd.image = image
+            
+        } else {
+            
+            print("CAM: A valid image was not selected")
+            
+        }
+        
+        //once you select an image, get rid of it
+        imagePicker.dismiss(animated: true, completion: nil)
+    }
+    
+
+    @IBAction func addImageTapped(_ sender: Any) {
+        
+        present(imagePicker, animated: true, completion: nil)
+    
     }
     
     @IBAction func signOut(_ sender: Any) {
@@ -110,6 +138,12 @@ class FeedViewController: UIViewController, UITableViewDelegate, UITableViewData
         performSegue(withIdentifier: "goToSignIn", sender: nil)
         
     }
+    
+    
+    
+    
+    
+    
     
 
 }
